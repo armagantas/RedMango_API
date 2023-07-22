@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RedMangoAPI.Data;
 
@@ -11,9 +12,11 @@ using RedMangoAPI.Data;
 namespace RedMangoAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230722215730_addMenuItem")]
+    partial class addMenuItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,108 +257,6 @@ namespace RedMangoAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MenuItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Category = "Appetizer",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/spring_roll.jpg",
-                            Name = "Spring Roll",
-                            Price = 7.9900000000000002,
-                            SpecialTag = ""
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Category = "Appetizer",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/idli.jpg",
-                            Name = "Idli",
-                            Price = 8.9900000000000002,
-                            SpecialTag = ""
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Category = "Appetizer",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/pani_puri.jpg",
-                            Name = "Panu Puri",
-                            Price = 8.9900000000000002,
-                            SpecialTag = "Best Seller"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Category = "Entrée",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/noodles.jpg",
-                            Name = "Hakka Noodles",
-                            Price = 10.99,
-                            SpecialTag = ""
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Category = "Entrée",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/malai.jpg",
-                            Name = "Malai Kofta",
-                            Price = 12.99,
-                            SpecialTag = "Top Rated"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Category = "Entrée",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/pizza.jpg",
-                            Name = "Paneer Pizza",
-                            Price = 11.99,
-                            SpecialTag = ""
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Category = "Entrée",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/tikka.jpg",
-                            Name = "Paneer Tikka",
-                            Price = 13.99,
-                            SpecialTag = "Chef's Special"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Category = "Dessert",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/carrot.jpg",
-                            Name = "Carrot Love",
-                            Price = 4.9900000000000002,
-                            SpecialTag = ""
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Category = "Dessert",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/rasmalai.jpg",
-                            Name = "Rasmalai",
-                            Price = 4.9900000000000002,
-                            SpecialTag = "Chef's Special"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Category = "Dessert",
-                            Description = "Fusc tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
-                            Image = "file:///C:/Users/armag/OneDrive/Belgeler/GitHub/RedMango-Fullstack/RedMangoAPI/RedMangoAPI/RedMangoImages/sweet.jpg",
-                            Name = "Sweet Rolls",
-                            Price = 3.9900000000000002,
-                            SpecialTag = "Top Rated"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -66,7 +66,7 @@ namespace RedMangoAPI.Controllers
 
                     string fileName = $"{Guid.NewGuid()}{Path.GetExtension(menuItemCreateDTO.File.FileName)}";
 
-                    string uploadFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "RedMangoAPIImages");
+                    string uploadFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "RedMangoImages");
 
                     Directory.CreateDirectory(uploadFolderPath);
 

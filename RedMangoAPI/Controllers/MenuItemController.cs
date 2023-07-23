@@ -106,5 +106,118 @@ namespace RedMangoAPI.Controllers
             return _response;
         }
 
+
+        [HttpPut("{id:int}")]
+
+        public async Task<ActionResult<ApiResponse>> UpdateMenuItem(int id, [FromForm] MenuItemUpdateDTO menuItemUpdateDTO)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if(menuItemUpdateDTO.File == null || menuItemUpdateDTO.File.Length == 0)
+                    {
+                        _response.StatusCode = HttpStatusCode.BadRequest;
+                        _response.IsSuccess = false;
+                        return BadRequest();
+                    }
+
+                    MenuItem menuItemFromDb = await _dbContext.MenuItems.FindAsync(id);
+
+                    if(menuItemFromDb == null)
+                    {
+                        _response.StatusCode = HttpStatusCode.BadRequest;
+                        _response.IsSuccess = false;
+                        return BadRequest();
+                    }
+
+                    menuItemFromDb.Name = menuItemUpdateDTO.Name;
+                    menuItemFromDb.Price = menuItemUpdateDTO.Price;
+                    menuItemFromDb.Category = menuItemUpdateDTO.Category;
+                    menuItemFromDb.SpecialTag = menuItemUpdateDTO.SpecialTag;
+                    menuItemFromDb.Description = menuItemUpdateDTO.Description;
+
+                    if(menuItemUpdateDTO.File != null && menuItemUpdateDTO.File.Length > 0)
+                    {
+                        string newFileName = $"{Guid.NewGuid()}{Path.GetExtension(menuItemUpdateDTO.File.FileName)}";
+                        string newUploadFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "RedMangoImages");
+                        Directory.CreateDirectory(newUploadFolderPath);
+                        string newImagePath = Path.Combine(newUploadFolderPath, newFileName);
+
+                        using(var fileStream = new FileStream(newImagePath, FileMode.Create))
+                        {
+                            await menuItemUpdateDTO.File.CopyToAsync(fileStream);
+                        }
+
+                        menuItemFromDb.Image = newImagePath;
+                    }
+                    _dbContext.MenuItems.Update(menuItemFromDb);
+                    _dbContext.SaveChanges();
+
+                    _response.StatusCode = HttpStatusCode.NoContent;
+                    return Ok(_response);
+                }
+                else
+                {
+                    _response.IsSuccess = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
+
+        [HttpDelete("{id:int}")]
+
+        public async Task <ActionResult<ApiResponse>> DeleteMenuItem(int id)
+        {
+            try
+            {
+                if (id == 0)
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    return BadRequest();
+                }
+
+                MenuItem menuItemFromDb = await _dbContext.MenuItems.FindAsync(id);
+
+                if(menuItemFromDb == null)
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    return BadRequest();
+                }
+
+                string imagePath = menuItemFromDb.Image;
+
+                int milliSeconds = 2000;
+
+                Thread.Sleep(milliSeconds);
+
+                _dbContext.MenuItems.Remove(menuItemFromDb);
+                _dbContext.SaveChanges();
+
+                if (!string.IsNullOrEmpty(imagePath) && System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+
+                _response.StatusCode = HttpStatusCode.NoContent;
+                return Ok(_response);
+
+            }
+            catch(Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
     }
 }

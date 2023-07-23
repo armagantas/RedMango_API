@@ -12,7 +12,7 @@ namespace RedMangoAPI.Controllers
     public class MenuItemController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
-        private ApiResponse _response;
+        protected ApiResponse _response;
 
         public MenuItemController(ApplicationDbContext dbContext)
         {
